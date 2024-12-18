@@ -1,20 +1,32 @@
 var pageCounter = 1;
-var animalContainer = document.getElementById("animal-info");
-var btn = document.getElementById("btn");
+var animalContainer = $("#animal-info");
+var btn = $("#btn");
 
-btn.addEventListener("click", function() {
-  var ourRequest = new XMLHttpRequest();
-  ourRequest.open('GET', 'https://learnwebcode.github.io/json-example/animals-' + pageCounter + '.json');
-  ourRequest.onload = function() {
-    var ourData = JSON.parse(ourRequest.responseText);
-    renderHTML(ourData);
-  };
-  ajaxSend();
+btn.on("click", function(){
+  $.ajax({
+    url: 'https://learnwebcode.github.io/json-example/animals-' + pageCounter + '.json',
+    method: "GET",
+    success: function renderHTML(result) {
+      animalContainer.append(result);
+    }
+  });
   pageCounter++;
   if (pageCounter > 3) {
-    btn.classList.add('hide-me');
+    btn.addClass('hide-me');
   }
 });
+
+//    ourRequest.open('GET', 'https://learnwebcode.github.io/json-example/animals-' + pageCounter + '.json');
+//    ourRequest.onload = function() {
+//      var ourData = JSON.parse(ourRequest.responseText);
+//      renderHTML(ourData);
+//    };
+//    ajaxSend();
+//    pageCounter++;
+//    if (pageCounter > 3) {
+//      btn.classList.add('hide-me');
+//    }
+//  });
 
 function renderHTML(data) {
   var htmlString = "";
