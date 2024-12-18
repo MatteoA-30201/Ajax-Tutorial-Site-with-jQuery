@@ -6,8 +6,9 @@ btn.on("click", function(){
   $.ajax({
     url: 'https://learnwebcode.github.io/json-example/animals-' + pageCounter + '.json',
     method: "GET",
-    success: function renderHTML(result) {
-      animalContainer.append(result);
+    success: function(result) {
+      renderHTML(result);
+      
     }
   });
   pageCounter++;
@@ -15,6 +16,7 @@ btn.on("click", function(){
     btn.addClass('hide-me');
   }
 });
+
 
 //    ourRequest.open('GET', 'https://learnwebcode.github.io/json-example/animals-' + pageCounter + '.json');
 //    ourRequest.onload = function() {
@@ -56,5 +58,5 @@ function renderHTML(data) {
     
   }
 
-  animalContainer.insertAdjacentHTML("beforeend", htmlString);
+  animalContainer.append(htmlString);
 };
